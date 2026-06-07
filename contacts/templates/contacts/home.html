@@ -1,0 +1,42 @@
+{% extends 'contacts/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <h4>Add New Contact</h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Add Contact</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <h4>All Contacts ({{ contacts|length }})</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.city }}</td>
+                    <td>
+                        <a href="/update/{{ contact.pk }}/" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/delete/{{ contact.pk }}/" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

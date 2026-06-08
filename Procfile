@@ -1,1 +1,1 @@
-web: gunicorn contactbook.wsgi
+gunicorn contactbook.wsgi
